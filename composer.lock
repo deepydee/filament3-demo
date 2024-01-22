@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3e8074dc0b61242512bfc75799106717",
+    "content-hash": "6bb7c606203c8c1d198f17dfee5c36d8",
     "packages": [
         {
             "name": "brick/math",
@@ -2661,6 +2661,38 @@
                 }
             ],
             "time": "2023-10-17T14:13:20+00:00"
+        },
+        {
+            "name": "modules/catalog",
+            "version": "1.0",
+            "dist": {
+                "type": "path",
+                "url": "app-modules/catalog",
+                "reference": "4751c2f4d31885d1b8c997a3315142a7249ddabd"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Modules\\Catalog\\Providers\\CatalogServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Modules\\Catalog\\": "src/",
+                    "Modules\\Catalog\\Tests\\": "tests/",
+                    "Modules\\Catalog\\Database\\Factories\\": "database/factories/",
+                    "Modules\\Catalog\\Database\\Seeders\\": "database/seeders/"
+                }
+            },
+            "license": [
+                "proprietary"
+            ],
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
         },
         {
             "name": "monolog/monolog",
