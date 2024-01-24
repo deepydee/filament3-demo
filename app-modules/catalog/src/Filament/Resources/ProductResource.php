@@ -9,6 +9,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Modules\Catalog\Enums\ProductStatus;
 use Modules\Catalog\Filament\Resources\ProductResource\Pages;
 use Modules\Catalog\Filament\Resources\ProductResource\RelationManagers;
 use Modules\Catalog\Models\Product;
@@ -32,6 +33,12 @@ class ProductResource extends Resource
                     ->required()
                     ->label(__('Product Price'))
                     ->placeholder(__('Product Price')),
+                // Forms\Components\Select::make('status')
+                //     ->label(__('Status'))
+                //     ->options(ProductStatus::class),
+                Forms\Components\Radio::make('status')
+                    ->label(__('Status'))
+                    ->options(ProductStatus::class),
             ]);
     }
 
@@ -50,6 +57,9 @@ class ProductResource extends Resource
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('status')
+                    ->label(__('Status'))
                     ->sortable(),
             ])
             ->defaultSort('created_at', 'desc')
