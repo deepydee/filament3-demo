@@ -38,7 +38,11 @@ class ProductResource extends Resource
                 //     ->options(ProductStatus::class),
                 Forms\Components\Radio::make('status')
                     ->label(__('Status'))
-                    ->options(ProductStatus::class),
+                    ->options(ProductStatus::class)
+                    ->default(ProductStatus::SoldOut),
+                Forms\Components\Select::make('category_id')
+                    ->label(__('Category'))
+                    ->relationship('category', 'name'),
             ]);
     }
 
@@ -60,6 +64,9 @@ class ProductResource extends Resource
                     ->sortable(),
                 Tables\Columns\TextColumn::make('status')
                     ->label(__('Status'))
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('category.name')
+                    ->label(__('Category'))
                     ->sortable(),
             ])
             ->defaultSort('created_at', 'desc')

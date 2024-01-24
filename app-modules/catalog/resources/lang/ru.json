@@ -4,5 +4,7 @@
     "In Stock": "В наличии",
     "Sold Out": "Нет в наличии",
     "Coming Soon": "Скоро будет",
-    "Status": "Статус"
+    "Status": "Статус",
+    "Category": "Категория",
+    "Product": "Продукт"
 }
