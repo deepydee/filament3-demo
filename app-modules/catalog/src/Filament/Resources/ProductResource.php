@@ -41,7 +41,7 @@ class ProductResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('name')
                     ->label(__('Product Name'))
-                    ->searchable()
+                    ->searchable(isIndividual: true, isGlobal: false)
                     ->sortable(),
                 Tables\Columns\TextColumn::make('price')
                     ->label(__('Product Price'))
@@ -50,6 +50,7 @@ class ProductResource extends Resource
                     ->dateTime()
                     ->sortable(),
             ])
+            ->defaultSort('price', 'desc')
             ->filters([
                 //
             ])
@@ -75,8 +76,8 @@ class ProductResource extends Resource
     {
         return [
             'index' => Pages\ListProducts::route('/'),
-            'create' => Pages\CreateProduct::route('/create'),
-            'edit' => Pages\EditProduct::route('/{record}/edit'),
+            // 'create' => Pages\CreateProduct::route('/create'),
+            // 'edit' => Pages\EditProduct::route('/{record}/edit'),
         ];
     }
 }
