@@ -45,12 +45,14 @@ class ProductResource extends Resource
                     ->sortable(),
                 Tables\Columns\TextColumn::make('price')
                     ->label(__('Product Price'))
+                    ->money('usd')
+                    ->getStateUsing(fn(Product $record): float => $record->price / 100)
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable(),
             ])
-            ->defaultSort('price', 'desc')
+            ->defaultSort('created_at', 'desc')
             ->filters([
                 //
             ])
@@ -76,8 +78,8 @@ class ProductResource extends Resource
     {
         return [
             'index' => Pages\ListProducts::route('/'),
-            // 'create' => Pages\CreateProduct::route('/create'),
-            // 'edit' => Pages\EditProduct::route('/{record}/edit'),
+            'create' => Pages\CreateProduct::route('/create'),
+            'edit' => Pages\EditProduct::route('/{record}/edit'),
         ];
     }
 }
