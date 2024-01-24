@@ -18762,6 +18762,154 @@
      
 }
 
+    namespace BezhanSalleh\FilamentShield\Facades { 
+            /**
+     * 
+     *
+     * @see \BezhanSalleh\FilamentShield\FilamentShield
+     */ 
+        class FilamentShield {
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function configurePermissionIdentifierUsing($callback)
+        {
+                        /** @var \BezhanSalleh\FilamentShield\FilamentShield $instance */
+                        return $instance->configurePermissionIdentifierUsing($callback);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function getPermissionIdentifier($resource)
+        {
+                        /** @var \BezhanSalleh\FilamentShield\FilamentShield $instance */
+                        return $instance->getPermissionIdentifier($resource);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function generateForResource($entity)
+        {
+                        /** @var \BezhanSalleh\FilamentShield\FilamentShield $instance */
+                        return $instance->generateForResource($entity);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function generateForPage($page)
+        {
+                        return \BezhanSalleh\FilamentShield\FilamentShield::generateForPage($page);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function generateForWidget($widget)
+        {
+                        return \BezhanSalleh\FilamentShield\FilamentShield::generateForWidget($widget);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function createRole($name = null)
+        {
+                        return \BezhanSalleh\FilamentShield\FilamentShield::createRole($name);
+        }
+                    /**
+         * Transform filament resources to key value pair for shield
+         *
+         * @static 
+         */ 
+        public static function getResources()
+        {
+                        /** @var \BezhanSalleh\FilamentShield\FilamentShield $instance */
+                        return $instance->getResources();
+        }
+                    /**
+         * Get the localized resource label
+         *
+         * @static 
+         */ 
+        public static function getLocalizedResourceLabel($entity)
+        {
+                        return \BezhanSalleh\FilamentShield\FilamentShield::getLocalizedResourceLabel($entity);
+        }
+                    /**
+         * Get the localized resource permission label
+         *
+         * @static 
+         */ 
+        public static function getLocalizedResourcePermissionLabel($permission)
+        {
+                        return \BezhanSalleh\FilamentShield\FilamentShield::getLocalizedResourcePermissionLabel($permission);
+        }
+                    /**
+         * Transform filament pages to key value pair for shield
+         *
+         * @static 
+         */ 
+        public static function getPages()
+        {
+                        return \BezhanSalleh\FilamentShield\FilamentShield::getPages();
+        }
+                    /**
+         * Get localized page label
+         *
+         * @static 
+         */ 
+        public static function getLocalizedPageLabel($page)
+        {
+                        return \BezhanSalleh\FilamentShield\FilamentShield::getLocalizedPageLabel($page);
+        }
+                    /**
+         * Transform filament widgets to key value pair for shield
+         *
+         * @static 
+         */ 
+        public static function getWidgets()
+        {
+                        return \BezhanSalleh\FilamentShield\FilamentShield::getWidgets();
+        }
+                    /**
+         * Get localized widget label
+         *
+         * @static 
+         */ 
+        public static function getLocalizedWidgetLabel($widget)
+        {
+                        return \BezhanSalleh\FilamentShield\FilamentShield::getLocalizedWidgetLabel($widget);
+        }
+                    /**
+         * 
+         *
+         * @template T
+         * @param \BezhanSalleh\FilamentShield\T  | callable(): T  $value
+         * @param array<string, mixed> $namedInjections
+         * @param array<string, mixed> $typedInjections
+         * @return \BezhanSalleh\FilamentShield\T 
+         * @static 
+         */ 
+        public static function evaluate($value, $namedInjections = [], $typedInjections = [])
+        {
+                        /** @var \BezhanSalleh\FilamentShield\FilamentShield $instance */
+                        return $instance->evaluate($value, $namedInjections, $typedInjections);
+        }
+         
+    }
+     
+}
+
     namespace InterNACHI\Modular\Support\Facades { 
             /**
      * 
@@ -20049,6 +20197,28 @@
         public static function lazy($enabled = true)
         {
                         return \Illuminate\Routing\Route::lazy($enabled);
+        }
+                    /**
+         * 
+         *
+         * @see \Spatie\Permission\PermissionServiceProvider::registerMacroHelpers()
+         * @param mixed $roles
+         * @static 
+         */ 
+        public static function role($roles = [])
+        {
+                        return \Illuminate\Routing\Route::role($roles);
+        }
+                    /**
+         * 
+         *
+         * @see \Spatie\Permission\PermissionServiceProvider::registerMacroHelpers()
+         * @param mixed $permissions
+         * @static 
+         */ 
+        public static function permission($permissions = [])
+        {
+                        return \Illuminate\Routing\Route::permission($permissions);
         }
          
     }
@@ -27076,6 +27246,7 @@ namespace  {
             class View extends \Illuminate\Support\Facades\View {}
             class Vite extends \Illuminate\Support\Facades\Vite {}
             class EloquentSerialize extends \AnourValar\EloquentSerialize\Facades\EloquentSerializeFacade {}
+            class FilamentShield extends \BezhanSalleh\FilamentShield\Facades\FilamentShield {}
             class Modules extends \InterNACHI\Modular\Support\Facades\Modules {}
             class Livewire extends \Livewire\Livewire {}
             class Flare extends \Spatie\LaravelIgnition\Facades\Flare {}
