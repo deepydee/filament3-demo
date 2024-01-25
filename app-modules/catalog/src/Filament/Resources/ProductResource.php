@@ -20,6 +20,8 @@ class ProductResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static ?int $navigationSort = 1;
+
     public static function form(Form $form): Form
     {
         return $form
@@ -57,16 +59,18 @@ class ProductResource extends Resource
                 Tables\Columns\TextColumn::make('price')
                     ->label(__('Product Price'))
                     ->money('usd')
-                    ->getStateUsing(fn(Product $record): float => $record->price / 100)
+                    ->getStateUsing(fn (Product $record): float => $record->price / 100)
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('status')
                     ->label(__('Status'))
+                    ->badge()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('category.name')
                     ->label(__('Category'))
+                    ->limit(15)
                     ->sortable(),
             ])
             ->defaultSort('created_at', 'desc')
@@ -98,5 +102,10 @@ class ProductResource extends Resource
             'create' => Pages\CreateProduct::route('/create'),
             'edit' => Pages\EditProduct::route('/{record}/edit'),
         ];
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return __('Products');
     }
 }
