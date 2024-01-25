@@ -81,7 +81,12 @@ class ProductResource extends Resource
             ])
             ->defaultSort('created_at', 'desc')
             ->filters([
-                //
+                Tables\Filters\SelectFilter::make('status')
+                    ->options(ProductStatus::class)
+                    ->label(__('Status')),
+                Tables\Filters\SelectFilter::make('category')
+                    ->relationship('category', 'name')
+                    ->label(__('Category')),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
