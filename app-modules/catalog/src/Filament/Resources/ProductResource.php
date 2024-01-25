@@ -67,15 +67,22 @@ class ProductResource extends Resource
                     ->getStateUsing(fn (Product $record): float => $record->price / 100)
                     ->alignEnd()
                     ->sortable(),
+                Tables\Columns\ToggleColumn::make('is_active')
+                    ->label(__('Is Active')),
+                // Tables\Columns\CheckboxColumn::make('is_active')
+                //     ->label(__('Is Active')),
                 Tables\Columns\TextColumn::make('created_at')
                     ->label(__('Created At'))
                     // ->dateTime('d.m.Y H:i')
                     ->since() // This will run "diffForHumans" under the hood
                     ->sortable(),
-                Tables\Columns\TextColumn::make('status')
+                // Tables\Columns\TextColumn::make('status')
+                //     ->label(__('Status'))
+                //     ->badge()
+                //     ->sortable(),
+                Tables\Columns\SelectColumn::make('status')
                     ->label(__('Status'))
-                    ->badge()
-                    ->sortable(),
+                    ->options(ProductStatus::class),
                 Tables\Columns\TextColumn::make('category.name')
                     ->label(__('Category'))
                     ->limit(15)

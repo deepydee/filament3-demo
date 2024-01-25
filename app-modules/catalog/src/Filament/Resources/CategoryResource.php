@@ -35,7 +35,8 @@ class CategoryResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')
+                Tables\Columns\TextInputColumn::make('name')
+                    ->rules(['required', 'min:3'])
                     ->searchable(),
                 Tables\Columns\TextColumn::make('products_count')
                     ->counts('products')
