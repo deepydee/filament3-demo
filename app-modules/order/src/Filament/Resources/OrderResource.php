@@ -48,6 +48,9 @@ class OrderResource extends Resource
                         Tables\Columns\Summarizers\Average::make(),
                         Tables\Columns\Summarizers\Range::make(),
                     ]),
+                Tables\Columns\IconColumn::make('is_completed')
+                    ->label(__('Complete Status'))
+                    ->boolean(),
             ])
             ->defaultSort('created_at', 'desc')
             ->defaultGroup('product.name')
@@ -55,7 +58,15 @@ class OrderResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\ActionGroup::make([
+                    Tables\Actions\EditAction::make(),
+                    Tables\Actions\Action::make('Mark Completed')
+                        ->label(__('Mark Completed'))
+                        ->requiresConfirmation()
+                        ->icon('heroicon-o-check-badge')
+                        ->hidden(fn (Order $record) => $record->is_completed)
+                        ->action(fn (Order $record) => $record->update(['is_completed' => true])),
+                ]),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
