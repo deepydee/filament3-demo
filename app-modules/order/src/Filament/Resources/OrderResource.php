@@ -2,6 +2,7 @@
 
 namespace Modules\Order\Filament\Resources;
 
+use BezhanSalleh\FilamentShield\Contracts\HasShieldPermissions;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -14,7 +15,7 @@ use Modules\Order\Filament\Resources\OrderResource\Pages;
 use Modules\Order\Filament\Resources\OrderResource\RelationManagers;
 use Modules\Order\Models\Order;
 
-class OrderResource extends Resource
+class OrderResource extends Resource implements HasShieldPermissions
 {
     protected static ?string $model = Order::class;
 
@@ -123,5 +124,17 @@ class OrderResource extends Resource
     public static function getNavigationBadge(): ?string
     {
         return Order::whereDate('created_at', today())->count() ? __('New') : '';
+    }
+
+    public static function getPermissionPrefixes(): array
+    {
+        return [
+            'view',
+            'view_any',
+            'create',
+            'update',
+            'delete',
+            'delete_any',
+        ];
     }
 }
