@@ -10,5 +10,7 @@
     "Products": "Продукты",
     "Categories": "Категории",
     "Catalog": "Каталог",
-    "Tags": "Теги"
+    "Tags": "Теги",
+    "Created From": "Создано c",
+    "Created Until": "Создано до"
 }
