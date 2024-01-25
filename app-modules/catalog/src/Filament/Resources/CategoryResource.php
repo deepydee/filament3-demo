@@ -2,9 +2,6 @@
 
 namespace Modules\Catalog\Filament\Resources;
 
-use Modules\Catalog\Filament\Resources\CategoryResource\Pages;
-use Modules\Catalog\Filament\Resources\CategoryResource\RelationManagers;
-use Modules\Catalog\Models\Category;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -12,6 +9,9 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Modules\Catalog\Filament\Resources\CategoryResource\Pages;
+use Modules\Catalog\Filament\Resources\CategoryResource\RelationManagers;
+use Modules\Catalog\Models\Category;
 
 class CategoryResource extends Resource
 {
@@ -73,5 +73,20 @@ class CategoryResource extends Resource
     public static function getNavigationLabel(): string
     {
         return __('Categories');
+    }
+
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
+
+    public static function getNavigationBadgeColor(): ?string
+    {
+        return static::getModel()::count() > 10 ? 'warning' : 'primary';
+    }
+
+    public static function getNavigationGroup(): ?string
+    {
+        return __('Catalog');
     }
 }

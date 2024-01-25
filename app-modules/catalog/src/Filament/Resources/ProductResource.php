@@ -108,4 +108,19 @@ class ProductResource extends Resource
     {
         return __('Products');
     }
+
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
+
+    public static function getNavigationBadgeColor(): ?string
+    {
+        return static::getModel()::count() > 10 ? 'warning' : 'primary';
+    }
+
+    public static function getNavigationGroup(): ?string
+    {
+        return __('Catalog');
+    }
 }
