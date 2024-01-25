@@ -36,10 +36,16 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
+            ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
+            ->discoverResources(in: app_path('../app-modules/catalog/src/Filament/Resources'), for: 'Modules\\Catalog\\Filament\\Resources')
+            ->discoverPages(in: app_path('../app-modules/catalog/src/Filament/Pages'), for: 'Modules\\Catalog\\Filament\\Pages')
+            ->discoverWidgets(in: app_path('../app-modules/catalog/src/Filament/Widgets'), for: 'Modules\\Catalog\\Filament\\Widgets')
+            ->discoverResources(in: app_path('../app-modules/order/src/Filament/Resources'), for: 'Modules\\Order\\Filament\\Resources')
+            ->discoverPages(in: app_path('../app-modules/order/src/Filament/Pages'), for: 'Modules\\Order\\Filament\\Pages')
+            ->discoverWidgets(in: app_path('../app-modules/order/src/Filament/Widgets'), for: 'Modules\\Order\\Filament\\Widgets')
             ->pages([
                 Pages\Dashboard::class,
             ])
-            ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
                 Widgets\AccountWidget::class,
                 Widgets\FilamentInfoWidget::class,

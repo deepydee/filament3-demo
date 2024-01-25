@@ -6,6 +6,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Modules\Catalog\Database\Seeders\CategorySeeder;
 use Modules\Catalog\Database\Seeders\TagSeeder;
+use Modules\Order\Database\Seeders\OrderSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -24,6 +25,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             CategorySeeder::class,
             TagSeeder::class,
+            OrderSeeder::class,
         ]);
     }
 }
