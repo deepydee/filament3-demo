@@ -26,29 +26,29 @@ class ProductResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')
-                    ->required()
-                    ->label(__('Product Name'))
-                    ->autofocus()
-                    ->placeholder(__('Product Name')),
-                Forms\Components\TextInput::make('price')
-                    ->required()
-                    ->label(__('Product Price'))
-                    ->placeholder(__('Product Price')),
-                // Forms\Components\Select::make('status')
-                //     ->label(__('Status'))
-                //     ->options(ProductStatus::class),
-                Forms\Components\Radio::make('status')
-                    ->label(__('Status'))
-                    ->options(ProductStatus::class)
-                    ->default(ProductStatus::SoldOut),
-                Forms\Components\Select::make('category_id')
-                    ->label(__('Category'))
-                    ->relationship('category', 'name'),
-                // Forms\Components\Select::make('tags')
-                //     ->relationship('tags', 'name')
-                //     ->preload()
-                //     ->multiple(),
+                Forms\Components\Fieldset::make('Main data')
+                    ->schema([
+                        Forms\Components\TextInput::make('name')
+                            ->required()
+                            ->label(__('Product Name'))
+                            ->autofocus()
+                            ->placeholder(__('Product Name')),
+                        Forms\Components\TextInput::make('price')
+                            ->required()
+                            ->label(__('Product Price'))
+                            ->placeholder(__('Product Price')),
+                    ])
+                    ->columns(2),
+                Forms\Components\Fieldset::make('Additional data')
+                    ->schema([
+                        Forms\Components\Radio::make('status')
+                            ->label(__('Status'))
+                            ->options(ProductStatus::class)
+                            ->default(ProductStatus::SoldOut),
+                        Forms\Components\Select::make('category_id')
+                            ->label(__('Category'))
+                            ->relationship('category', 'name'),
+                    ])
             ]);
     }
 
