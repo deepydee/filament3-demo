@@ -45,6 +45,10 @@ class ProductResource extends Resource
                 Forms\Components\Select::make('category_id')
                     ->label(__('Category'))
                     ->relationship('category', 'name'),
+                // Forms\Components\Select::make('tags')
+                //     ->relationship('tags', 'name')
+                //     ->preload()
+                //     ->multiple(),
             ]);
     }
 
@@ -72,6 +76,8 @@ class ProductResource extends Resource
                     ->label(__('Category'))
                     ->limit(15)
                     ->sortable(),
+                Tables\Columns\TextColumn::make('tags.name')
+                    ->label(__('Tags')),
             ])
             ->defaultSort('created_at', 'desc')
             ->filters([
@@ -91,7 +97,7 @@ class ProductResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\TagsRelationManager::class,
         ];
     }
 

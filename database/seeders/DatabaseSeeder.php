@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Modules\Catalog\Database\Seeders\CategorySeeder;
+use Modules\Catalog\Database\Seeders\TagSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -22,6 +23,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             CategorySeeder::class,
+            TagSeeder::class,
         ]);
     }
 }
