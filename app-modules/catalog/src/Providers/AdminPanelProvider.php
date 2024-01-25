@@ -16,6 +16,6 @@ class AdminPanelProvider extends \App\Providers\Filament\AdminPanelProvider
         return $panel
             ->discoverResources(in: app_path($modulePath.'Filament/Resources'), for: 'Modules\\Catalog\\Filament\\Resources')
             ->discoverPages(in: app_path($modulePath.'Filament/Pages'), for: 'Modules\\Catalog\\Filament\\Pages')
-            ->discoverWidgets(in: app_path($modulePath.'Filament/Widgets'), for: 'App\\Filament\\Widgets');
+            ->discoverWidgets(in: app_path($modulePath.'Filament/Widgets'), for: 'Modules\\Catalog\\Filament\\Widgets');
     }
 }
