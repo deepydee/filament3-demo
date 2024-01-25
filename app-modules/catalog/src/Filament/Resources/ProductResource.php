@@ -59,14 +59,18 @@ class ProductResource extends Resource
                 Tables\Columns\TextColumn::make('name')
                     ->label(__('Product Name'))
                     ->searchable(isIndividual: true, isGlobal: false)
-                    ->sortable(),
+                    ->sortable()
+                    ->url(fn(Product $product): string => self::getUrl('edit', ['record' => $product->id])),
                 Tables\Columns\TextColumn::make('price')
                     ->label(__('Product Price'))
                     ->money('usd')
                     ->getStateUsing(fn (Product $record): float => $record->price / 100)
+                    ->alignEnd()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
+                    ->label(__('Created At'))
+                    // ->dateTime('d.m.Y H:i')
+                    ->since() // This will run "diffForHumans" under the hood
                     ->sortable(),
                 Tables\Columns\TextColumn::make('status')
                     ->label(__('Status'))
