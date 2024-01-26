@@ -18,6 +18,13 @@ class CategoryFactory extends Factory
     {
         return [
             'name' => fake()->sentence(),
+            'is_active' => fake()->boolean(),
+            'url_key' => fake()->slug(2),
+            'url_path' => fake()->slug(2),
+            'seo_name' => fake()->sentence(),
+            'meta_title' => fake()->sentence(),
+            'meta_keywords' => fake()->sentence(),
+            'meta_description' => fake()->sentence(),
         ];
     }
 }
