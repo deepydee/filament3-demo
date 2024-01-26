@@ -22,6 +22,15 @@ class AdminPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
     {
+        $modulesDirname = config('app-modules.modules_directory');
+        $modulesNamespace = config('app-modules.modules_namespace');
+
+        $modulesDir = new \DirectoryIterator(base_path($modulesDirname));
+
+        foreach ($modulesDir as $module) {
+            $this->discoverModule($panel, $module, $modulesDirname, $modulesNamespace);
+        }
+
         return $panel
             ->default()
             ->id('admin')
@@ -37,15 +46,6 @@ class AdminPanelProvider extends PanelProvider
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
-            ->discoverResources(in: app_path('../app-modules/catalog/src/Filament/Resources'), for: 'Modules\\Catalog\\Filament\\Resources')
-            ->discoverPages(in: app_path('../app-modules/catalog/src/Filament/Pages'), for: 'Modules\\Catalog\\Filament\\Pages')
-            ->discoverWidgets(in: app_path('../app-modules/catalog/src/Filament/Widgets'), for: 'Modules\\Catalog\\Filament\\Widgets')
-            ->discoverResources(in: app_path('../app-modules/order/src/Filament/Resources'), for: 'Modules\\Order\\Filament\\Resources')
-            ->discoverPages(in: app_path('../app-modules/order/src/Filament/Pages'), for: 'Modules\\Order\\Filament\\Pages')
-            ->discoverWidgets(in: app_path('../app-modules/order/src/Filament/Widgets'), for: 'Modules\\Order\\Filament\\Widgets')
-            ->discoverResources(in: app_path('../app-modules/user/src/Filament/Resources'), for: 'Modules\\User\\Filament\\Resources')
-            ->discoverPages(in: app_path('../app-modules/user/src/Filament/Pages'), for: 'Modules\\User\\Filament\\Pages')
-            ->discoverWidgets(in: app_path('../app-modules/user/src/Filament/Widgets'), for: 'Modules\\User\\Filament\\Widgets')
             ->pages([
                 Pages\Dashboard::class,
             ])
@@ -71,5 +71,29 @@ class AdminPanelProvider extends PanelProvider
                 Authenticate::class,
             ])
             ->globalSearchKeyBindings(['command+k', 'ctrl+k']);;
+    }
+
+    private function discoverModule(
+        Panel $panel,
+        \DirectoryIterator $module,
+        string $modulesDirname,
+        string $modulesNamespace
+    ): void {
+        if ($module->isDir() && !$module->isDot()) {
+            $panel->discoverResources(
+                in: base_path($modulesDirname) . '/' . $module->getBasename(). '/src/Filament/Resources',
+                for: $modulesNamespace . '\\' . \Str::ucfirst($module->getBasename()) . '\\Filament\\Resources'
+            );
+
+            $panel->discoverPages(
+                in: base_path($modulesDirname) . '/' . $module->getBasename(). '/src/Filament/Pages',
+                for: $modulesNamespace . '\\' . \Str::ucfirst($module->getBasename()) . '\\Filament\\Pages'
+            );
+
+            $panel->discoverWidgets(
+                in: base_path($modulesDirname) . '/' . $module->getBasename(). '/src/Filament/Widgets',
+                for: $modulesNamespace . '\\' . \Str::ucfirst($module->getBasename()) . '\\Filament\\Widgets'
+            );
+        }
     }
 }
