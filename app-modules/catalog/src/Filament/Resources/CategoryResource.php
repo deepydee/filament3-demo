@@ -2,6 +2,7 @@
 
 namespace Modules\Catalog\Filament\Resources;
 
+use CodeWithDennis\FilamentSelectTree\SelectTree;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -28,6 +29,28 @@ class CategoryResource extends Resource
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(255),
+                Forms\Components\Toggle::make('is_active'),
+                Forms\Components\Toggle::make('is_popular'),
+                Forms\Components\Toggle::make('show_in_menu'),
+                 Forms\Components\TextInput::make('url_key')
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('url_path')
+                    ->maxLength(255),
+                Forms\Components\Textarea::make('description')
+                    ->rows(10)
+                    ->cols(20),
+                Forms\Components\TextInput::make('seo_name')
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('meta_title')
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('meta_keywords')
+                    ->maxLength(255),
+                Forms\Components\Textarea::make('meta_description')
+                    ->rows(10)
+                    ->cols(20),
+                Forms\Components\Toggle::make('include_in_sitemap'),
+                SelectTree::make('parent_id')
+                    ->relationship('parent', 'name', 'parent_id')
             ]);
     }
 
@@ -35,12 +58,17 @@ class CategoryResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextInputColumn::make('name')
-                    ->rules(['required', 'min:3'])
+                Tables\Columns\TextColumn::make('id'),
+                Tables\Columns\TextColumn::make('parent.name'),
+                Tables\Columns\TextColumn::make('name')
                     ->searchable(),
+                Tables\Columns\TextColumn::make('level'),
                 Tables\Columns\TextColumn::make('products_count')
                     ->counts('products')
                     ->label(__('Products')),
+                Tables\Columns\ToggleColumn::make('is_active'),
+                Tables\Columns\ToggleColumn::make('is_popular',),
+                Tables\Columns\ToggleColumn::make('show_in_menu'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -54,8 +82,10 @@ class CategoryResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\ActionGroup::make([
+                    Tables\Actions\EditAction::make(),
+                    Tables\Actions\DeleteAction::make(),
+                ])
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
