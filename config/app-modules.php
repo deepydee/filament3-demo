@@ -77,7 +77,5 @@ return [
     | ],
     */
 
-    'stubs' => [
-        'src/Providers/StubClassNamePrefixServiceProvider.php' => base_path('stubs/app-modules/ServiceProvider.php'),
-    ],
+    'stubs' => null,
 ];
