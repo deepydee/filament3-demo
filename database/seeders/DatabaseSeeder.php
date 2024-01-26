@@ -4,6 +4,9 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Modules\Catalog\Database\Seeders\CategorySeeder;
+use Modules\Catalog\Database\Seeders\TagSeeder;
+use Modules\Order\Database\Seeders\OrderSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -12,11 +15,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
+        \App\Models\User::factory(10)->create();
 
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+
+        $this->call([
+            CategorySeeder::class,
+            TagSeeder::class,
+            OrderSeeder::class,
+        ]);
     }
 }

@@ -1,0 +1,19 @@
+{
+    "Product Name": "Название продукта",
+    "Product Price": "Цена продукта",
+    "In Stock": "В наличии",
+    "Sold Out": "Нет в наличии",
+    "Coming Soon": "Скоро будет",
+    "Status": "Статус",
+    "Category": "Категория",
+    "Product": "Продукт",
+    "Products": "Продукты",
+    "Categories": "Категории",
+    "Catalog": "Каталог",
+    "Tags": "Теги",
+    "Created From": "Создано c",
+    "Created Until": "Создано до",
+    "Created At": "Создано",
+    "Is Active": "Активно",
+    "New": "Новый"
+}
