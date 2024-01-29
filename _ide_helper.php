@@ -22815,6 +22815,28 @@
      
 }
 
+    namespace Illuminate\Database\Schema { 
+            /**
+     * 
+     *
+     */ 
+        class Blueprint {
+                    /**
+         * 
+         *
+         * @see \SolutionForest\FilamentTree\Macros\BlueprintMarcos::treeColumns()
+         * @param string $titleType
+         * @static 
+         */ 
+        public static function treeColumns($titleType = 'string')
+        {
+                        return \Illuminate\Database\Schema\Blueprint::treeColumns($titleType);
+        }
+         
+    }
+     
+}
+
 
 namespace  { 
             class App extends \Illuminate\Support\Facades\App {}

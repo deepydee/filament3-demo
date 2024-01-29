@@ -116,6 +116,13 @@ class OrderResource extends Resource implements HasShieldPermissions
         ];
     }
 
+    public static function getWidgets(): array
+    {
+        return [
+            OrderResource\Widgets\TotalOrders::class
+        ];
+    }
+
     public static function getNavigationLabel(): string
     {
         return __('Orders');

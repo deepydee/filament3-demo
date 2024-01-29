@@ -2,6 +2,9 @@
 
 namespace Modules\Catalog\Filament\Resources;
 
+use Modules\Catalog\Filament\Resources\CategoryResource\Pages;
+use Modules\Catalog\Filament\Resources\CategoryResource\RelationManagers;
+use Modules\Catalog\Models\Category;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -9,17 +12,12 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Modules\Catalog\Filament\Resources\CategoryResource\Pages;
-use Modules\Catalog\Filament\Resources\CategoryResource\RelationManagers;
-use Modules\Catalog\Models\Category;
 
 class CategoryResource extends Resource
 {
     protected static ?string $model = Category::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-folder';
-
-    protected static ?int $navigationSort = 0;
+    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Form $form): Form
     {
@@ -27,7 +25,14 @@ class CategoryResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('name')
                     ->required()
-                    ->maxLength(255),
+                    ->label(__('Name')),
+                Forms\Components\Select::make('parent_id')
+                    ->options(Category::pluck('name', 'id'))
+                    ->preload()
+                    ->searchable()
+                    ->label(__('Parent')),
+                Forms\Components\TextInput::make('order')
+                    ->label(__('Order')),
             ]);
     }
 
@@ -35,27 +40,15 @@ class CategoryResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextInputColumn::make('name')
-                    ->rules(['required', 'min:3'])
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('products_count')
-                    ->counts('products')
-                    ->label(__('Products')),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('name'),
+                Tables\Columns\TextColumn::make('parent_id'),
+                Tables\Columns\TextColumn::make('order'),
             ])
             ->filters([
                 //
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -64,30 +57,28 @@ class CategoryResource extends Resource
             ]);
     }
 
-    public static function getPages(): array
+    public static function getRelations(): array
     {
         return [
-            'index' => Pages\ManageCategories::route('/'),
+            //
         ];
     }
 
-    public static function getNavigationLabel(): string
+    public static function getWidgets(): array
     {
-        return __('Categories');
+        return [
+            CategoryResource\Widgets\CategoryWidget::class,
+            CategoryResource\Widgets\CreateCategoryWidget::class,
+        ];
     }
 
-    public static function getNavigationBadge(): ?string
+    public static function getPages(): array
     {
-        return static::getModel()::count();
-    }
-
-    public static function getNavigationBadgeColor(): ?string
-    {
-        return static::getModel()::count() > 10 ? 'warning' : 'primary';
-    }
-
-    public static function getNavigationGroup(): ?string
-    {
-        return __('Catalog');
+        return [
+            'index' => Pages\ListCategories::route('/'),
+            'create' => Pages\CreateCategory::route('/create'),
+            'edit' => Pages\EditCategory::route('/{record}/edit'),
+            'tree' => Pages\CategoryTree::route('/tree'),
+        ];
     }
 }

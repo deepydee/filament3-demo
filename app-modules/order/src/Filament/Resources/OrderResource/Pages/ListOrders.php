@@ -22,4 +22,11 @@ class ListOrders extends ListRecords
     {
         return __('Orders');
     }
+
+    protected function getHeaderWidgets(): array
+    {
+        return [
+            OrderResource\Widgets\TotalOrders::class
+        ];
+    }
 }

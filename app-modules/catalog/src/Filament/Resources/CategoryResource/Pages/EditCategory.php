@@ -2,24 +2,18 @@
 
 namespace Modules\Catalog\Filament\Resources\CategoryResource\Pages;
 
-use Illuminate\Contracts\Support\Htmlable;
 use Modules\Catalog\Filament\Resources\CategoryResource;
 use Filament\Actions;
-use Filament\Resources\Pages\ManageRecords;
+use Filament\Resources\Pages\EditRecord;
 
-class ManageCategories extends ManageRecords
+class EditCategory extends EditRecord
 {
     protected static string $resource = CategoryResource::class;
 
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            Actions\DeleteAction::make(),
         ];
-    }
-
-    public function getTitle(): string|Htmlable
-    {
-        return __('Categories');
     }
 }

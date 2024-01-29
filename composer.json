@@ -12,6 +12,7 @@
         "bezhansalleh/filament-shield": "^3.2",
         "doctrine/dbal": "^3.7",
         "filament/filament": "^3.2",
+        "flowframe/laravel-trend": "^0.1.5",
         "guzzlehttp/guzzle": "^7.2",
         "internachi/modular": "^2.0",
         "laravel/framework": "^10.10",
@@ -19,7 +20,8 @@
         "laravel/tinker": "^2.8",
         "modules/catalog": "*",
         "modules/order": "*",
-        "modules/user": "*"
+        "modules/user": "*",
+        "solution-forest/filament-tree": "^2.0"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.13",
